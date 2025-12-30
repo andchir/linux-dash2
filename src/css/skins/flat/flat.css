@@ -147,17 +147,35 @@ nav-bar .right-content a:hover {
     border: 1px solid var(--flat-border);
     border-radius: var(--flat-radius-sm);
     color: var(--flat-text-secondary);
-    width: 32px;
-    height: 32px;
-    margin: 0 0 0 8px;
+    width: 28px;
+    height: 28px;
+    margin: 0 0 0 6px;
     padding: 0;
     float: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    line-height: 1;
+    font-size: 14px;
+    line-height: 28px;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
     transition: all 0.2s ease;
+}
+
+/* Fine-tune icon centering for specific buttons */
+.ld-top-bar-btn.minimize-btn {
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 2px; /* Adjust '-' character visual centering */
+}
+
+.ld-top-bar-btn.width-toggle-btn {
+    font-size: 13px;
+}
+
+.ld-top-bar-btn.refresh-btn {
+    font-size: 15px;
 }
 
 .ld-top-bar-btn:hover {
