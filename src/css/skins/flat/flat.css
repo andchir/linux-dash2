@@ -309,7 +309,7 @@ table tr:nth-child(even) td {
     background-color: var(--flat-surface-alt);
 }
 
-table tr:hover td {
+table tbody tr:hover td {
     background-color: var(--flat-surface-hover);
 }
 
