@@ -3,3 +3,4 @@ node_modules
 */linuxDash.min.js.map
 temp
 .playwright-mcp/
+__pycache__/
