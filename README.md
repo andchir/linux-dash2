@@ -34,6 +34,7 @@
 * **Simple** ---- A minimalist, beautiful dashboard
 * **Easy** ------ Drop-in installation
 * **Versatile** -- Choose your stack from Node.js, Go, Python, PHP
+* **Customizable** -- Support for custom skins/themes
 
 ## Installation
 
@@ -91,9 +92,18 @@ To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github
 
 #### If Using Python
 ```sh
-# Start the server (on port 80 by default; may require sudo).
+# For Python 2 (legacy, deprecated)
 python index.py
+
+# For Python 3 (recommended)
+python3 server/python3.py --port 8080
 ```
+
+The Python 3 server (`server/python3.py`) includes:
+- Modern Python 3 syntax using `http.server` and `socketserver`
+- Improved MIME type handling
+- Protection against directory traversal attacks
+- Proper handling of binary files
 
 #### If Using PHP
 
@@ -102,6 +112,81 @@ python index.py
 2. Restart your web server (Apache, nginx, etc.)
   - For PHP + Apache setup follow the [Digital Ocean tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-linux-dash-on-ubuntu-14-04).
   - For help with nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov).
+
+## Customization with Skins
+
+Linux-dash now supports customizable skins (themes) to personalize the appearance of your dashboard. Skins allow you to change colors, typography, and overall visual style.
+
+### Available Skins
+
+#### Flat Skin (Dark Theme)
+A modern, flat dark theme featuring:
+- Medium-dark background (not too harsh on the eyes)
+- No shadows - clean, flat design with subtle borders
+- Rounded corners (12-16px border radius)
+- Modern typography using Inter font
+- Purple/blue accents for headings
+- Teal/green accents for progress bars
+- Smooth animations and transitions
+
+![Flat Skin Screenshot](https://raw.githubusercontent.com/konard/andchir-linux-dash2/issue-1-8b730620b3a9/screenshots/flat-skin-screenshot.png)
+
+### Using a Skin
+
+To apply a skin, edit `app/index.html` and change the skin CSS link:
+
+```html
+<!-- Skin: uncomment to apply a skin, or change 'flat' to another skin name -->
+<link href='skins/flat.min.css' rel='stylesheet' type='text/css' id='skin-css'>
+```
+
+To disable skins and use the default theme, simply comment out or remove the skin CSS link.
+
+### Creating Custom Skins
+
+You can create your own custom skins:
+
+1. Create a new directory under `src/css/skins/your-skin-name/`
+2. Add your CSS file(s) in that directory (e.g., `your-skin-name.css`)
+3. Build the skin using one of these methods:
+
+**Option A: Using Gulp (automated build system)**
+```sh
+# Install dependencies first (if not already installed)
+npm install
+
+# Build all skins
+gulp --gulpfile gulpfile_skins.js build
+
+# Or build and watch for changes during development
+gulp --gulpfile gulpfile_skins.js
+```
+
+**Option B: Using clean-css-cli (manual build)**
+```sh
+# Install clean-css-cli if not already installed
+npm install -g clean-css-cli
+
+# Build your skin
+npx cleancss -o app/skins/your-skin-name.min.css src/css/skins/your-skin-name/your-skin-name.css
+```
+
+4. Update `app/index.html` to reference your new skin:
+```html
+<link href='skins/your-skin-name.min.css' rel='stylesheet' type='text/css' id='skin-css'>
+```
+
+The gulpfile_skins.js build system will automatically:
+- Find all skin directories in `src/css/skins/`
+- Minify and concatenate CSS files
+- Output minified skins to `app/skins/`
+
+### Skin Development Tips
+
+- Use CSS custom properties (variables) for easy color customization
+- Start from the existing flat skin as a reference (`src/css/skins/flat/flat.css`)
+- The skin CSS will override the default styles from `linuxDash.min.css`
+- Test your skin by running the server and checking different dashboard sections
 
 ## Support
 
