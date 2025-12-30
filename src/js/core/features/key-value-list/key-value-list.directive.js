@@ -1,4 +1,4 @@
-angular.module('linuxDash').directive('keyValueList', ['server', '$rootScope', function (server, $rootScope) {
+angular.module('linuxDash').directive('keyValueList', ['server', function (server) {
   return {
     scope: {
       heading: '@',
@@ -19,7 +19,7 @@ angular.module('linuxDash').directive('keyValueList', ['server', '$rootScope', f
             scope.emptyResult = true
           }
 
-          if (!scope.$$phase && !$rootScope.$$phase) scope.$digest()
+          scope.$applyAsync()
         })
       }
 

@@ -1,4 +1,4 @@
-angular.module('linuxDash').directive('tableData', ['server', '$rootScope', function (server, $rootScope) {
+angular.module('linuxDash').directive('tableData', ['server', function (server) {
   return {
     scope: {
       heading: '@',
@@ -69,7 +69,7 @@ angular.module('linuxDash').directive('tableData', ['server', '$rootScope', func
             scope.emptyResult = true
           }
 
-          if (!scope.$$phase && !$rootScope.$$phase) scope.$digest()
+          scope.$applyAsync()
         })
       }
 
