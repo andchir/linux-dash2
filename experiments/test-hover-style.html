@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test: table tbody tr:hover td style fix</title>
+    <style>
+        /* Base styles (from linuxDash.min.css) */
+        table tbody tr:hover td {
+            background-color: #fafafa;  /* Light gray - BASE STYLE */
+        }
+
+        /* Flat theme styles - MUST override the base */
+        /* OLD (broken): table tr:hover td - lower specificity, gets overridden */
+        /* NEW (fixed): table tbody tr:hover td - same specificity, wins because comes later */
+        table tbody tr:hover td {
+            background-color: #363d4f;  /* Dark gray - FLAT THEME */
+        }
+
+        /* Additional styles for visibility */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e2430;
+            color: #e8eaf0;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #3a4255;
+            background-color: #272d3b;
+        }
+        .test-result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .success { background-color: #065f46; }
+        .failure { background-color: #7f1d1d; }
+    </style>
+</head>
+<body>
+    <h1>Test: table tbody tr:hover td style fix</h1>
+    <p>Hover over the table rows to test the fix.</p>
+    <p>Expected: Dark gray hover (#363d4f) should show, not light gray (#fafafa)</p>
+
+    <table>
+        <thead>
+            <tr><th>Column 1</th><th>Column 2</th><th>Column 3</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Row 1, Cell 1</td><td>Row 1, Cell 2</td><td>Row 1, Cell 3</td></tr>
+            <tr><td>Row 2, Cell 1</td><td>Row 2, Cell 2</td><td>Row 2, Cell 3</td></tr>
+            <tr><td>Row 3, Cell 1</td><td>Row 3, Cell 2</td><td>Row 3, Cell 3</td></tr>
+        </tbody>
+    </table>
+
+    <div id="result" class="test-result"></div>
+
+    <script>
+        const table = document.querySelector('table tbody tr');
+        const resultDiv = document.getElementById('result');
+
+        table.addEventListener('mouseenter', function() {
+            const td = this.querySelector('td');
+            const computedStyle = getComputedStyle(td);
+            const bgColor = computedStyle.backgroundColor;
+
+            // rgb(54, 61, 79) is #363d4f (flat theme - correct)
+            // rgb(250, 250, 250) is #fafafa (base theme - wrong)
+            const isFixed = bgColor === 'rgb(54, 61, 79)';
+
+            resultDiv.className = 'test-result ' + (isFixed ? 'success' : 'failure');
+            resultDiv.innerHTML = '<strong>Hover detected!</strong><br>' +
+                'Background color: ' + bgColor + '<br>' +
+                'Status: ' + (isFixed ? 'PASS - Flat theme style applied correctly!' : 'FAIL - Base style is still winning');
+        });
+
+        table.addEventListener('mouseleave', function() {
+            resultDiv.innerHTML = 'Hover over a row to test...';
+            resultDiv.className = 'test-result';
+        });
+
+        resultDiv.innerHTML = 'Hover over a row to test...';
+    </script>
+</body>
+</html>
