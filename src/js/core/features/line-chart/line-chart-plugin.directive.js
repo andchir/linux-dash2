@@ -21,7 +21,7 @@ angular.module('linuxDash').directive('lineChartPlugin', [
         var start_rendering_line_chart = function () {
 
           if (!scope.color)
-            scope.color = '0, 255, 0'
+            scope.color = '78, 205, 196'
 
           var series, w, h, canvas
 
@@ -35,8 +35,8 @@ angular.module('linuxDash').directive('lineChartPlugin', [
             borderVisible: false,
             sharpLines: true,
             grid: {
-              fillStyle: '#ffffff',
-              strokeStyle: 'rgba(232,230,230,0.93)',
+              fillStyle: '#272d3b',
+              strokeStyle: 'rgba(58, 66, 85, 0.8)',
               sharpLines: true,
               millisPerLine: 3000,
               borderVisible: false
@@ -44,13 +44,13 @@ angular.module('linuxDash').directive('lineChartPlugin', [
             labels: {
               fontSize: 11,
               precision: 0,
-              fillStyle: '#0f0e0e'
+              fillStyle: '#e8eaf0'
             },
             maxValue: parseInt(scope.maxValue),
             minValue: parseInt(scope.minValue),
             horizontalLines: [{
               value: 5,
-              color: '#eff',
+              color: 'rgba(58, 66, 85, 0.5)',
               lineWidth: 1
             }]
           })

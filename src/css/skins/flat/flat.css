@@ -356,6 +356,9 @@ table tr:last-child td:last-child {
     color: var(--flat-text);
     border: 1px solid var(--flat-border);
     border-radius: var(--flat-radius-sm);
+    box-sizing: border-box;
+    padding: 5px 10px;
+    height: auto;
 }
 
 .table-data-plugin .filter::placeholder {
