@@ -300,6 +300,46 @@ table tr:last-child td:last-child {
 }
 
 /* =====================================================
+   Table Data Plugin (override base styles)
+   ===================================================== */
+.table-data-plugin thead tr th a,
+.table-data-plugin thead tr th a:visited,
+.table-data-plugin thead tr th a:link {
+    color: var(--flat-text);
+    text-decoration: none;
+}
+
+.table-data-plugin thead tr th a:hover {
+    color: var(--flat-primary-light);
+}
+
+.table-data-plugin .column-sort-caret {
+    color: var(--flat-primary);
+}
+
+.table-data-plugin .filter-container {
+    background-color: var(--flat-surface-alt);
+}
+
+.table-data-plugin .filter,
+.table-data-plugin .filter:focus,
+.table-data-plugin .filter:active {
+    background: var(--flat-surface);
+    color: var(--flat-text);
+    border: 1px solid var(--flat-border);
+    border-radius: var(--flat-radius-sm);
+}
+
+.table-data-plugin .filter::placeholder {
+    color: var(--flat-text-muted);
+}
+
+.table-data-plugin .filter:focus {
+    border-color: var(--flat-primary);
+    outline: none;
+}
+
+/* =====================================================
    Key-Value List
    ===================================================== */
 .key-value-list {
