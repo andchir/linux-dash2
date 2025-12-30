@@ -24,8 +24,9 @@ angular
           websocket.connection = new WebSocket(websocketUrl);
 
           websocket.connection.onopen = function() {
-            $rootScope.$broadcast("start-linux-dash", {});
-            $rootScope.$apply();
+            $rootScope.$applyAsync(function() {
+              $rootScope.$broadcast("start-linux-dash", {});
+            });
             console.info('Websocket connection is open');
           };
 
