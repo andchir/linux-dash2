@@ -16,7 +16,7 @@ from socketserver import ThreadingMixIn
 
 
 parser = argparse.ArgumentParser(description='Simple Threaded HTTP server to run linux-dash.')
-parser.add_argument('--port', metavar='PORT', type=int, nargs='?', default=80,
+parser.add_argument('--port', metavar='PORT', type=int, nargs='?', default=8080,
                     help='Port to run the server on.')
 
 modulesSubPath = '/server/linux_json_api.sh'
