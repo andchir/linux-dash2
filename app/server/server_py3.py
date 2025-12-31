@@ -98,7 +98,7 @@ class MainHandler(BaseHTTPRequestHandler):
 if __name__ == '__main__':
     args = parser.parse_args()
     server = ThreadedHTTPServer(('0.0.0.0', args.port), MainHandler)
-    print('Starting linux-dash server on port %d' % args.port)
+    print('Starting linux-dash server on http://localhost:%d/' % args.port)
     print('Use <Ctrl-C> to stop')
     try:
         server.serve_forever()
